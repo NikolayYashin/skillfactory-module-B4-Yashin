@@ -68,11 +68,14 @@ def find(name, session):
     """
     Производит поиск пользователя в таблице user по заданному имени name
     """
-    query = session.query(User).all()
-    # print(query)
-    quer=query[int(name)-1]
-    # print(User)
     print()
+    query = session.query(User).all()
+    if  int(name) > len(query):
+        print ("Пользователя с таки идентификатором нет, максимальный идентификатор позьдователя:", len(query))
+        print()
+        return
+    quer=query[int(name)-1]
+    # print(User)   
     print("Пользователь:            ", quer.id, quer.first_name, quer.last_name, quer.gender, quer.email, quer.birthdate, quer.height)
 
     query1 = session.query(Athelete).filter(Athelete.height > 0)
